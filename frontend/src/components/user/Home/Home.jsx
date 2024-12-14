@@ -1,5 +1,17 @@
 import React, { useEffect, useRef } from "react";
-import { motion } from "motion/react";
+import { AnimatedDiv, AnimatedH1, AnimatedP } from "./AnimatedComponent";
+import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import LocalLaundryServiceIcon from "@mui/icons-material/LocalLaundryService";
+import SportsCricketIcon from "@mui/icons-material/SportsCricket";
+import TvIcon from "@mui/icons-material/Tv";
+import CasinoIcon from "@mui/icons-material/Casino";
+import TwoWheelerIcon from "@mui/icons-material/TwoWheeler";
+import TungstenIcon from "@mui/icons-material/Tungsten";
+import LocalDrinkIcon from "@mui/icons-material/LocalDrink";
+import WifiIcon from "@mui/icons-material/Wifi";
+
+const iconStyle = { fontSize: "2.5rem" };
 
 const hostelData = {
     title: "PG Hostel For Men and Women",
@@ -12,16 +24,16 @@ const hostelData = {
             capacity: 587,
             buildings: ["PG Block", "Research Scholar Block"],
             facilities: [
-                "Library (includes a Digital Library and a Visually Impaired Library with Braille Books)",
-                "Gym",
-                "Smart Laundry Room (with Washing Machine)",
-                "Playgrounds (Cricket, Shuttle, Football, Volleyball, Kabaddi)",
-                "TV Hall",
-                "Indoor Games Room (Chess, Carom Board)",
-                "Parking",
-                "24x7 Electricity",
-                "RO Drinking Water",
-                "Wi-Fi",
+                { name: "Library", icon: <LocalLibraryIcon sx={iconStyle} /> },
+                { name: "Gym", icon: <FitnessCenterIcon sx={iconStyle} /> },
+                { name: "Smart Laundry Room", icon: <LocalLaundryServiceIcon sx={iconStyle} /> },
+                { name: "Playgrounds", icon: <SportsCricketIcon sx={iconStyle} /> },
+                { name: "TV Hall", icon: <TvIcon sx={iconStyle} /> },
+                { name: "Indoor Games Room", icon: <CasinoIcon sx={iconStyle} /> },
+                { name: "Parking", icon: <TwoWheelerIcon sx={iconStyle} /> },
+                { name: "24x7 Electricity", icon: <TungstenIcon sx={iconStyle} /> },
+                { name: "RO Drinking Water", icon: <LocalDrinkIcon sx={iconStyle} /> },
+                { name: "Wi-Fi", icon: <WifiIcon sx={iconStyle} /> },
             ],
         },
         {
@@ -200,65 +212,136 @@ const Home = () => {
         <>
             <div className="w-full h-full flex-center flex-col">
                 <div className="w-full flex-center flex-col max-w-[1250px] px-8 md:px-4">
-                    <div className="flex-center flex-col min-h-[50vh] md:min-h-[80vh] text-center gap-y-6">
-                        <motion.h1
-                            initial={{ opacity: 0, translateY: -10 }}
-                            whileInView={{ opacity: 1, translateY: 0 }}
-                            transition={{ duration: 0.2, delay: 0.2 }}
-                            className="text-darkGray font-black text-4xl md:text-6xl"
-                        >
-                            Your Journey Starts Here at
-                            <br className="my-4" />
-                            <motion.h1
-                                initial={{ opacity: 0, translateY: -10 }}
-                                whileInView={{ opacity: 1, translateY: 0 }}
-                                transition={{ duration: 0.2, delay: 0.4 }}
-                                className="text-primary font-black"
+                    <div className="flex-center flex-col min-h-[90vh] md:min-h-[80vh] text-center gap-y-6">
+                        <div className="flex flex-col md:gap-y-4">
+                            <AnimatedH1
+                                delay={0.3}
+                                className="text-darkGray font-black text-4xl md:text-6xl"
+                            >
+                                Your Journey Starts Here at
+                            </AnimatedH1>
+                            <AnimatedH1
+                                delay={0.6}
+                                className="text-primary font-black text-4xl md:text-6xl"
                             >
                                 Dream Land
-                            </motion.h1>
-                        </motion.h1>
-                        <motion.p
-                            initial={{ opacity: 0, translateY: -10 }}
-                            whileInView={{ opacity: 1, translateY: 0 }}
-                            transition={{ duration: 0.2, delay: 0.6 }}
+                            </AnimatedH1>
+                        </div>
+                        <AnimatedP
+                            delay={0.9}
                             className="text-black font-extralight text-sm md:text-xl"
                         >
                             Welcome to Taramani PG for Men and Women
-                        </motion.p>
+                        </AnimatedP>
                     </div>
-                    <div className="w-full h-full flex flex-col md:flex-row gap-x-8 gap-y-4 md:mt-28">
-                        <motion.div
-                            initial={{ opacity: 0, translateY: -10 }}
-                            whileInView={{ opacity: 1, translateY: 0 }}
-                            transition={{ duration: 0.2, delay: 0.4 }}
-                            className="w-full h-full flex justify-center md:justify-start md:flex-1"
+                    <div className="w-full h-full min-h-[90vh] md:min-h-[60vh] flex flex-col lg:flex-row gap-x-8 gap-y-4 md:mt-28">
+                        <AnimatedDiv
+                            delay={0.6}
+                            className="w-full h-full flex justify-center lg:justify-start lg:flex-1"
                         >
                             <img
-                                className="rounded-lg object-contain w-[500px] md:w-[700px]"
+                                className="rounded-lg object-contain w-[500px] md:w-[600px]"
                                 src="/unom.jpg"
                                 alt="unom image"
                             />
-                        </motion.div>
-                        <div className="flex flex-col gap-y-4 flex-1">
-                            <motion.h2
-                                initial={{ opacity: 0, translateY: -10 }}
-                                whileInView={{ opacity: 1, translateY: 0 }}
-                                transition={{ duration: 0.2, delay: 0.2 }}
-                                className="font-black text-darkGray text-3xl md:text-4xl lg:text-5xl text-center md:text-end"
+                        </AnimatedDiv>
+                        <div className="flex items-center lg:items-end flex-col gap-y-4 flex-1">
+                            <AnimatedH1
+                                delay={0.3}
+                                className="font-black text-darkGray text-3xl md:text-4xl lg:text-5xl text-center lg:text-end"
                             >
                                 Know about the
                                 <br />
                                 Dream Land
-                            </motion.h2>
-                            <motion.p
-                                initial={{ opacity: 0, translateY: -10 }}
-                                whileInView={{ opacity: 1, translateY: 0 }}
-                                transition={{ duration: 0.2, delay: 0.6 }}
-                                className="font-light text-justify md:text-base lg:text-xl md:font-extralight"
+                            </AnimatedH1>
+                            <AnimatedP
+                                delay={0.9}
+                                className="font-light text-justify md:text-base lg:text-xl lg:font-extralight max-w-[600px]"
                             >
                                 {hostelData.description}
-                            </motion.p>
+                            </AnimatedP>
+                        </div>
+                    </div>
+                    <div className="w-full min-h-screen flex flex-col sm:flex-row gap-y-8 sm:gap-y-0">
+                        {hostelData.sections.slice(0, 2).map((section, key) => (
+                            <div
+                                key={key}
+                                className={`w-full h-full flex flex-col gap-y-4 md:mt-28`}
+                            >
+                                <AnimatedH1
+                                    delay={0.3}
+                                    className={`font-black text-darkGray text-3xl md:text-4xl lg:text-5xl text-center`}
+                                >
+                                    {section.title}
+                                </AnimatedH1>
+                                <div className="w-full h-full flex-center flex-col gap-y-4">
+                                    {/* <img
+                                      className="rounded-lg object-contain w-[500px] md:w-[600px]"
+                                      src="/unom.jpg"
+                                      alt="unom image"
+                                  /> */}
+                                    <div className="flex-center gap-x-12 md:gap-x-16 w-full h-full">
+                                        <AnimatedDiv
+                                            delay={0.6}
+                                            className="flex items-center p-4 flex-col bg-gradient-to-br from-tertiary 0% to-primary 100% rounded-lg w-[120px] h-[120px] md:w-[150px] md:h-[150px] shadow-lg"
+                                        >
+                                            <h3 className="text-dimWhite font-bold text-lg">
+                                                Established
+                                            </h3>
+                                            <p className="translate-y-2/4 font-black text-dimWhite text-3xl">
+                                                {section.established}
+                                            </p>
+                                        </AnimatedDiv>
+                                        <AnimatedDiv
+                                            delay={0.9}
+                                            className="flex items-center p-4 flex-col bg-gradient-to-br from-tertiary 0% to-primary 100% rounded-lg w-[120px] h-[120px] md:w-[150px] md:h-[150px] shadow-lg"
+                                        >
+                                            <h3 className="text-dimWhite font-bold text-lg">
+                                                Capacity
+                                            </h3>
+                                            <p className="translate-y-2/4 font-black text-dimWhite text-3xl">
+                                                {section.capacity}
+                                            </p>
+                                        </AnimatedDiv>
+                                    </div>
+                                    <AnimatedDiv
+                                        delay={1.2}
+                                        className="flex items-center p-4 bg-gradient-to-br from-tertiary 0% to-primary 100% rounded-lg w-full h-[120px] md:h-[150px] shadow-lg gap-x-4"
+                                    >
+                                        <h3 className="flex-center text-darkGray font-bold text-lg bg-dimWhite h-full w-[120px] md:w-[120px] rounded-lg p-4">
+                                            Buildings
+                                        </h3>
+                                        <div className="w-full h-full flex flex-col justify-between gap-y-2">
+                                            {section.buildings.map((building, key) => (
+                                                <p className="text-darkGray font-semibold text-md bg-dimWhite w-full h-full flex-center rounded-md">
+                                                    {building}
+                                                </p>
+                                            ))}
+                                        </div>
+                                    </AnimatedDiv>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="w-full min-h-screen flex-center flex-col gap-y-8">
+                        <AnimatedH1
+                            delay={0.2}
+                            className={`font-black text-darkGray text-3xl md:text-4xl lg:text-5xl text-center`}
+                        >
+                            Facilities
+                        </AnimatedH1>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-8 lg:gap-x-20 lg:gap-y-8">
+                            {hostelData.sections[0].facilities.map((facility, key) => (
+                                <div
+                                    key={key}
+                                    className="bg-lightGray4 rounded-xl w-[140px] h-[140px] md:w-[170px] md:h-[170px] flex-center flex-col p-2 md:p-4 gap-y-4 shadow-lg"
+                                >
+                                    {facility.icon}
+                                    <p className="font-light text-sm text-center">
+                                        {facility.name}
+                                    </p>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
