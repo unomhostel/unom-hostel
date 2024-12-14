@@ -2,64 +2,75 @@
 @tailwind components;
 @tailwind utilities;
 
-
-*{
-    font-family: Montserrat, sans-serif;
+* {
+    font-family: Poppins, sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-:root{
-    --primary: #ff5151;
-    --secondary: #ff2121;
-    --darkGray: #212121;
+:root {
+    --primary: #0095f6;
+    --secondary: #0065f6;
+    --darkGray: #1d1d1f;
     --mediumGray: #303030;
     --mediumGray2: #555;
     --lightGray: #9e9e9e;
     --lightGray2: #aeaeae;
     --lightGray3: #dadada;
     --lightGray4: #ebebeb;
-    --dimWhite: rgba(255, 255, 255, 0.7);
-    --toastify-toast-width: 600px;
+    --dimWhite: #fafbfc;
+    --toastify-toast-width: 400px;
     --toastify-toast-min-height: 60px;
-    --toastify-toast-bd-radius: 2px;
-    --toastify-icon-color-success: white;
-    --toastify-icon-color-error: white;
+    --toastify-toast-bd-radius: 5px;
+    --toastify-icon-color-success: transparent;
+    --toastify-icon-color-error: transparent;
 }
 
-.Toastify__toast-theme--dark.Toastify__toast--success {
-    background: #057709;
-    color: white;
-    font-weight: 500;
+.Toastify__toast-theme--light.Toastify__toast--success {
+    background: white;
+    color: black;
+    font-weight: 400;
     text-align: center;
 }
 
-.Toastify__toast-theme--dark.Toastify__toast--error {
-    background: #e74c3c;
-    color: white;
-    font-weight: 500;
+.Toastify__toast-theme--light.Toastify__toast--error {
+    background: white;
+    color: black;
+    font-weight: 400;
     text-align: center;
 }
 
-.Toastify__close-button{
+.Toastify__toast-theme--light.Toastify__toast--success::before {
+    background-color: #07bc0c;
+    height: 100%;
+    width: 15px;
+}
+
+.Toastify__toast-theme--light.Toastify__toast--error::before {
+    background-color: red;
+    height: 100%;
+    width: 15px;
+}
+
+.Toastify__close-button {
     transition: none;
     visibility: hidden;
-    color: white;
+    color: black;
     opacity: 1;
 }
 
-.Toastify__toast:hover .Toastify__close-button{
+.Toastify__toast:hover .Toastify__close-button {
     visibility: visible;
 }
 
-.flex-center{
+.flex-center {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.btn{
+.btn {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -71,7 +82,7 @@
     color: var(--primary);
 }
 
-.btn-fill{
+.btn-fill {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -82,28 +93,26 @@
     color: white;
 }
 
-.btn-fill:hover{
+.btn-fill:hover {
     background-color: var(--secondary);
 }
 
-
-.btn:hover{
+.btn:hover {
     background-color: var(--primary);
     color: white;
 }
 
-
-.input-theme{
+.input-theme {
     border-bottom: 2px solid var(--lightGray3);
     padding: 0.1rem 0.5rem;
 }
 
-.input-theme:focus{
+.input-theme:focus {
     outline: none;
     border-bottom-color: var(--primary);
 }
 
-.placeholder{
+.placeholder {
     position: absolute;
     left: 0.4rem;
     top: 0;
@@ -112,22 +121,21 @@
     transition: 0.1s linear;
 }
 
-.placeholder.active{
+.placeholder.active {
     top: -24px;
     left: 0;
     font-size: 13px;
     counter-reset: var(--primary);
 }
 
-.input-theme:focus + .placeholder{
+.input-theme:focus + .placeholder {
     top: -24px;
     left: 0;
     font-size: 13px;
     color: var(--primary);
 }
 
-
-.heading{
+.heading {
     display: flex;
     font-weight: bold;
     font-size: 30px;
@@ -135,7 +143,7 @@
     gap: 0.9rem;
 }
 
-.heading:before{
+.heading:before {
     content: "";
     width: 20px;
     height: 35px;
@@ -148,18 +156,18 @@
     opacity: 0; /* Start hidden */
     transform: translateY(20px); /* Start with a slight downward offset */
     transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* Smooth fade-in */
-  }
-  
-  .fade-in.visible {
+}
+
+.fade-in.visible {
     opacity: 1; /* Fully visible */
     transform: translateY(0); /* Move to original position */
-  }
-  
-  .fade-in.loaded {
-    opacity: 1; /* Fully opaque when loaded */
-  }
+}
 
-  .Navbar {
+.fade-in.loaded {
+    opacity: 1; /* Fully opaque when loaded */
+}
+
+.Navbar {
     position: relative;
 }
 
@@ -174,4 +182,3 @@
         align-items: center;
     }
 }
-  

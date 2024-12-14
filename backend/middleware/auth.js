@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const catchAsyncErrors = require("./catchAsyncErrors");
 const errorHandler = require("../utils/errorHandler");
-const Users = require("../models/Users");
+const { Users, Roles } = require("../models");
 
 exports.isAuthenticated = catchAsyncErrors(async (req, res, next) => {
     const { AUTHCOOKIE } = req.cookies;
@@ -12,12 +12,30 @@ exports.isAuthenticated = catchAsyncErrors(async (req, res, next) => {
 
     const decodedData = jwt.verify(AUTHCOOKIE, process.env.JWT_SECRET);
 
-    // req.user = await pool.execute(
-    //     "SELECT s.id as studentId, s.full_name, s.email FROM student s WHERE s.id = ?",
-    //     [decodedData.userId]
-    // );
+    const user = await Users.findOne({
+        include: [
+            {
+                model: Roles,
+                attributes: [["role_name", "role"]],
+            },
+        ],
+        where: { id: decodedData.user_id },
+        raw: true,
+    });
 
-    req.user = await Users.findOne({ where: { id: decodedData.id } });
+    user.role = user["Role.role"];
+    delete user["Role.role"];
+
+    req.user = user;
 
     next();
 });
+
+exports.authorizeRoles = ([...roles]) => {
+    return (req, res, next) => {
+        if (!roles.includes(req.user.role)) {
+            return next(new errorHandler("Cannot access the resource", 403));
+        }
+        next();
+    };
+};

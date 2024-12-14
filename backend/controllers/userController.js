@@ -57,16 +57,18 @@ exports.logout = catchAsyncErrors(async (req, res, next) => {
     });
 });
 
+//user dashboard
+
 exports.getuserdetails = catchAsyncErrors(async (req, res, next) => {
-    const { studentId } = req.user[0][0];
+    const { id } = req.user;
 
     try {
-        const [user] = await pool.execute("SELECT * FROM student WHERE id = ?", [studentId]);
+        const user = await Users.findOne({ where: { id: id } });
 
-        if (user.length > 0) {
+        if (user) {
             res.status(200).json({
                 success: true,
-                user,
+                user: user.dataValues,
             });
         } else {
             return next(new errorHandler("Student not found", 404));

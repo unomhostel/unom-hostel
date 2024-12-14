@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClose } from '@fortawesome/free-solid-svg-icons';
-import { Link, useNavigate } from 'react-router-dom';
-import { login } from '../../../features/user/userThunks';
-import { useDispatch, useSelector } from 'react-redux';
-import { LoginLoader } from '../../../layouts';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { login } from "../../../features/user/userThunks";
+import { useDispatch, useSelector } from "react-redux";
+import LoginLoader from "../../../layouts/LoginLoader/LoginLoader";
 
 const Login = () => {
-    const [Email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    
+    const [Email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { error, loading, isAuthenticated, isLoggingIn } = useSelector((state) => state.user);
@@ -25,14 +23,14 @@ const Login = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const loginForm = new FormData();
-        loginForm.set('email', Email);
-        loginForm.set('password', password);
+        loginForm.set("email", Email);
+        loginForm.set("password", password);
         dispatch(login(loginForm));
     };
 
     useEffect(() => {
         if (isAuthenticated && isLoggingIn) {
-            navigate('/');
+            navigate("/");
         }
     }, [isAuthenticated, isLoggingIn]);
 
@@ -67,7 +65,6 @@ const Login = () => {
                     </button>
                     {error && <p className="text-red-500">{error.message}</p>}
                 </form>
-                
             </div>
         </div>
     );

@@ -1,20 +1,20 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import HomeIcon from '@mui/icons-material/Home';
-import InfoIcon from '@mui/icons-material/Info';
-import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
-import MenuIcon from '@mui/icons-material/Menu';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { logoutuser } from '../../../features/user/userThunks';
+import React from "react";
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import HomeIcon from "@mui/icons-material/Home";
+import InfoIcon from "@mui/icons-material/Info";
+import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
+import MenuIcon from "@mui/icons-material/Menu";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutuser } from "../../../features/user/userThunks";
 
 const Navbar = () => {
     const [state, setState] = React.useState({
@@ -26,15 +26,16 @@ const Navbar = () => {
     const { isAuthenticated } = useSelector((state) => state.user);
 
     const toggleDrawer = (open) => (event) => {
-        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+        if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
             return;
         }
         setState((prevState) => ({ ...prevState, left: !prevState.left }));
     };
 
     const handleLogout = () => {
-        dispatch(logoutuser());
-        navigate('/'); 
+        dispatch(logoutuser()).then((res) => {
+            if (res.payload.success) navigate("/");
+        });
     };
 
     const list = () => (
@@ -46,7 +47,7 @@ const Navbar = () => {
         >
             <List>
                 <ListItem disablePadding>
-                    <ListItemButton component={Link} to="/"> 
+                    <ListItemButton component={Link} to="/">
                         <ListItemIcon>
                             <HomeIcon />
                         </ListItemIcon>
@@ -54,17 +55,17 @@ const Navbar = () => {
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
-                    <ListItemButton component={Link} to="/about"> 
+                    <ListItemButton component={Link} to="/about">
                         <ListItemIcon>
                             <InfoIcon />
                         </ListItemIcon>
                         <ListItemText primary={"About"} />
                     </ListItemButton>
                 </ListItem>
-                
+
                 {isAuthenticated && (
                     <ListItem disablePadding>
-                        <ListItemButton component={Link} to="/account"> 
+                        <ListItemButton component={Link} to="/account">
                             <ListItemIcon>
                                 <PermContactCalendarIcon />
                             </ListItemIcon>
@@ -97,16 +98,9 @@ const Navbar = () => {
     );
 
     return (
-        <div className='Navbar'>
-            <MenuIcon
-                onClick={toggleDrawer(true)} 
-                style={{ cursor: 'pointer' }} 
-            />
-            <Drawer
-                anchor={"left"}
-                open={state["left"]}
-                onClose={toggleDrawer(false)}
-            >
+        <div className="Navbar">
+            <MenuIcon onClick={toggleDrawer(true)} style={{ cursor: "pointer" }} />
+            <Drawer anchor={"left"} open={state["left"]} onClose={toggleDrawer(false)}>
                 {list()}
             </Drawer>
         </div>
