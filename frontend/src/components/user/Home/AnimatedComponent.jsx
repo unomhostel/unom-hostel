@@ -31,10 +31,10 @@ const AnimatedP = ({ children, delay = 0, ...props }) => {
 const AnimatedH1 = ({ children, delay = 0, ...props }) => {
     return (
         <motion.h1
-            initial={{ opacity: 0, translateY: -10 }}
+            initial={{ opacity: 0, translateY: -20 }}
             whileInView={{ opacity: 1, translateY: 0 }}
             transition={{ duration: 0.2, delay }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.1 }}
             {...props}
         >
             {children}
