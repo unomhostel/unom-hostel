@@ -16,8 +16,15 @@ exports.login = catchAsyncErrors(async (req, res, next) => {
 
         //fetch the user using email
         const user = await Users.findOne({
+            include: [{ model: Roles, attributes: ["role_name"] }],
             where: { email: email },
+            raw: true,
         });
+
+        user.role = user["Role.role_name"];
+        delete user["Role.role_name"];
+
+        console.log(user);
 
         //return message if no user found
         if (!user) {
@@ -25,11 +32,11 @@ exports.login = catchAsyncErrors(async (req, res, next) => {
         }
 
         //compare provided and hashed password
-        const isPasswordMatch = await bcrypt.compare(password, user.dataValues.password);
+        const isPasswordMatch = await bcrypt.compare(password, user.password);
 
         //check for password validity and send token if valid
         if (isPasswordMatch) {
-            sendToken(user.dataValues, 201, res);
+            sendToken(user, 201, res);
         } else {
             return next(new errorHandler(`Invalid email or password`, 400));
         }
@@ -63,12 +70,19 @@ exports.getuserdetails = catchAsyncErrors(async (req, res, next) => {
     const { id } = req.user;
 
     try {
-        const user = await Users.findOne({ where: { id: id } });
+        const user = await Users.findOne({
+            include: [{ model: Roles, attributes: ["role_name"] }],
+            where: { id: id },
+            raw: true,
+        });
+
+        user.role = user["Role.role_name"];
+        delete user["Role.role_name"];
 
         if (user) {
             res.status(200).json({
                 success: true,
-                user: user.dataValues,
+                user: user,
             });
         } else {
             return next(new errorHandler("Student not found", 404));

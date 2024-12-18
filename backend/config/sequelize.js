@@ -13,7 +13,7 @@ const dbConnection = async () => {
         await sequelize.sync();
         console.log("+ DB SYNCED");
     } catch (error) {
-        console.error("- DB CONNECTION FAILED");
+        console.error("- DB CONNECTION FAILED\n error: ", error);
     }
 };
 

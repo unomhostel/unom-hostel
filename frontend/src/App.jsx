@@ -12,6 +12,7 @@ import NotFound from "./layouts/404/NotFound";
 import { clearUserError, clearUserMessage } from "./features/user/userSlice";
 import { loaduser } from "./features/user/userThunks";
 import Loader from "./layouts/Loader/Loader";
+
 function App() {
     const dispatch = useDispatch();
     const hasLoadedUser = useRef(false);
